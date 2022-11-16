@@ -74,13 +74,13 @@ abstract class EasyAdminUserCrudController extends AbstractCrudController
 
         $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
         $actions->update(Crud::PAGE_INDEX, Action::DELETE, static function (Action $action) use ($currentUser): Action {
-            $action->displayIf(static fn (User $entity): bool => $currentUser->getUserIdentifier() !== $entity->getEmail());
+            $action->displayIf(static fn (?User $entity): bool => $currentUser->getUserIdentifier() !== $entity?->getEmail());
 
             return $action;
         });
 
         $actions->update(Crud::PAGE_DETAIL, Action::DELETE, static function (Action $action) use ($currentUser): Action {
-            $action->displayIf(static fn (User $entity): bool => $currentUser->getUserIdentifier() !== $entity->getEmail());
+            $action->displayIf(static fn (?User $entity): bool => $currentUser->getUserIdentifier() !== $entity?->getEmail());
 
             return $action;
         });
